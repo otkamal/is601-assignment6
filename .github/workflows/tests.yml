@@ -1,5 +1,4 @@
 name: Run Unit Tests on Changes to Main
-run-name: ${{ github.actor }} is pushing changes to Main
 on:
   push:
     branches:

@@ -1,5 +1,4 @@
 name: Check Files Pass Lint
-run-name: ${{ github.actor }} is pushing changes to Main
 on:
   push:
     branches:
