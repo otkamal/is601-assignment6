@@ -1,7 +1,5 @@
-import logging
 from pyfiglet import Figlet
 from app.calculator import Calculator
-from app.calculation import CalculationFactory
 
 def start_repl(calculator: Calculator) -> None:
     """
@@ -50,9 +48,11 @@ def start_repl(calculator: Calculator) -> None:
                 continue
             elif user_input == "save":
                 calculator.save_history()
+                print("History saved to disk.")
                 continue
             elif user_input == "clear":
                 calculator.clear_history()
+                print("History has been cleared.")
                 continue
             
             try:
