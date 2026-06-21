@@ -79,8 +79,11 @@ class Calculator():
         logging.info(f"notified {len(self._subscribers)} subscribers")
 
     def show_history(self) -> None:
-        for calculation in self._history:
-            print(calculation)
+        if not self._history:
+            print("No history yet.")
+            return
+        for i, calc in enumerate(self._history, start=1):
+            print(f"{i}. {calc}")
 
     def save_history(self) -> None:
         try:
@@ -94,3 +97,7 @@ class Calculator():
     def shutdown(self) -> None:
         for sub in self._subscribers:
             sub.update_on_shutdown(self)
+
+    def clear_history(self) -> None:
+        self._history.clear()
+        logging.info("cleared history in memory")
