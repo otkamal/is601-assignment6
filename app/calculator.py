@@ -1,5 +1,6 @@
 import logging
 import pandas as pd
+from app.memento import CalculatorMemento
 from app.calculation import Calculation, CalculationFactory
 from app.observer import Subscriber, CalculationSubscriber, AutoSaveSubscriber
 from app.calculator_config import CalculatorConfig
@@ -26,9 +27,13 @@ class Calculator():
         self._init_logging()
         self._init_history()
         self._log_config()
+
         self._add_subscriber(CalculationSubscriber())
         if self.config.auto_save:
             self._add_subscriber(AutoSaveSubscriber())
+
+        self._undo_stack: list[CalculatorMemento] = []
+        self._redo_stack: list[CalculatorMemento] = []
 
     def calculate(self, operation: str, operand_a: float, operand_b: float) -> Calculation:
         """Build, execute, and record a calculation.
@@ -47,6 +52,8 @@ class Calculator():
         """
         calc = CalculationFactory.build_calculation(operation, operand_a, operand_b)
         calc.execute()
+        self._undo_stack.append(CalculatorMemento(self))
+        self._redo_stack.clear()
         if len(self._history) >= self.config.history_size:
             logging.info(f"max history size hit -> removing {self._history.pop(0)}")
         self._history.append(calc)
@@ -138,3 +145,19 @@ class Calculator():
     @staticmethod
     def get_supported_operations():
         return CalculationFactory.get_supported_operations()
+    
+    def undo(self):
+        if not self._undo_stack:
+            return False
+        memento = self._undo_stack.pop()
+        self._redo_stack.append(CalculatorMemento(self))
+        self._history = memento.get_history()
+        return True
+
+    def redo(self):
+        if not self._redo_stack:
+            return False
+        memento = self._redo_stack.pop()
+        self._undo_stack.append(CalculatorMemento(self))
+        self._history = memento.get_history()
+        return True
