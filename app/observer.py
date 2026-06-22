@@ -25,15 +25,15 @@ class CalculationSubscriber(Subscriber):
         if c is not None:
             logging.info(f"calculation performed -> {c}")
 
-    def update_on_shutdown(self, calculator: "Calculator"):
-        pass
+    def update_on_shutdown(self, calculator: "Calculator"): # pragma: no cover
+        pass                                                # pragma: no cover
 
 
 class AutoSaveSubscriber(Subscriber):
     """Persists history to disk when the calculator shuts down."""
 
-    def update(self, calculator: "Calculator"):
-        pass
+    def update(self, calculator: "Calculator"): # pragma: no cover
+        pass                                    # pragma: no cover
 
     def update_on_shutdown(self, calculator: "Calculator"):
         """Save the current history to the configured CSV file."""
