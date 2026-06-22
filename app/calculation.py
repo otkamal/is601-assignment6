@@ -62,9 +62,6 @@ class Calculation(ABC):
             "operand_b": self.operand_b,
             "result": self.result
         }
-    
-    def test(self) -> bool:
-        return self.execute() == self.result
 
 class CalculationFactory:
 
