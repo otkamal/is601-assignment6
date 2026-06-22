@@ -126,6 +126,7 @@ class Calculator():
 
     def shutdown(self) -> None:
         """Notify all subscribers of shutdown so they can flush state to disk."""
+        logging.info(f"calculator is shutting down. sending final notify")
         for sub in self._subscribers:
             sub.update_on_shutdown(self)
 
@@ -133,3 +134,7 @@ class Calculator():
         """Clear the in-memory history without touching the history file."""
         self._history.clear()
         logging.info("cleared history in memory")
+
+    @staticmethod
+    def get_supported_operations():
+        return CalculationFactory.get_supported_operations()
