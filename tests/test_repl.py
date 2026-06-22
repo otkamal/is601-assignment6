@@ -91,3 +91,15 @@ def test_get_history(monkeypatch, capsys):
     start_repl(mock_calculator)
     mock_calculator.get_history.assert_called_once()
     assert "1. Addition(a = 1.0, b = 1.0, result = 2.0)" in capsys.readouterr().out
+
+def test_load_history():
+    pass
+
+def test_undo_history():
+    pass
+
+def test_redo_history():
+    pass
+
+def test_help():
+    pass
