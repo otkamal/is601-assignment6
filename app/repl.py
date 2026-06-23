@@ -2,26 +2,28 @@ from pyfiglet import Figlet
 from app.calculator import Calculator
 
 def start_repl(calculator: Calculator) -> None:
-    """
-    Runs an interactive calculator REPL (Read-Eval-Print Loop).
+    """Run an interactive calculator REPL (Read-Eval-Print Loop).
 
-    Prompts the user to enter an operation and two numbers in the format
-    <operation> <a> <b>, computes the result, and prints it. Continues
-    until the user types 'exit'.
+    Accepts one input per prompt. Calculations use the format '<operation> <a> <b>'.
+    All errors are caught and printed; the loop continues until 'exit' is entered.
+    Calls calculator.shutdown() on exit via a finally block.
 
-    Supported operations:
-        - add: Adds a and b.
-        - subtract: Subtracts b from a.
-        - multiply: Multiplies a and b.
-        - divide: Divides a by b.
+    Commands:
+        history: Print the current calculation history.
+        save:    Persist history to disk.
+        load:    Reload history from disk, replacing the current in-memory history.
+        clear:   Clear the in-memory history without touching the history file.
+        undo:    Revert the last calculation.
+        redo:    Re-apply the last undone calculation.
+        help:    List all commands and supported operations.
+        exit:    Shut down the REPL.
 
-    Raises:
-        ZeroDivisionError: If divide is used and b is zero (handled internally).
-        ValueError: If the input format is invalid (handled internally).
+    Args:
+        calculator: The Calculator instance to use for all operations.
 
     Example:
-        >>> calculator()
-        Enter an operation and two numbers, or 'exit' to quit: add 5 3
+        >>> start_repl(calculator)
+        >>> add 5 3
         Result: 8.0
     """
 

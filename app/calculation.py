@@ -16,16 +16,16 @@ class Calculation(ABC):
     """
 
     def __init__(self, a: float, b: float, result: Optional[float] = None):
-        """
-        Initializes the calculation with two operands.
+        """Initialize the calculation with two operands and an optional result.
 
         Args:
             a: The first operand.
             b: The second operand.
+            result: Pre-computed result, or None if execute() has not been called yet.
         """
         self.operand_a = a
         self.operand_b = b
-        self.result = None
+        self.result = result
 
     @abstractmethod
     def execute(self) -> float:
@@ -37,24 +37,27 @@ class Calculation(ABC):
         """
 
     def __str__(self) -> str:
-        """
-        Returns a human-readable string representation of the calculation.
+        """Return a human-readable string representation of the calculation.
 
         Returns:
-            A string in the format ClassName(operand_a, operand_b).
+            A string in the format 'ClassName(a = <a>, b = <b>, result = <result>)'.
         """
         return f"{self.__class__.__name__}(a = {self.operand_a}, b = {self.operand_b}, result = {self.result})"
 
     def __repr__(self) -> str:
-        """
-        Returns a detailed string representation of the calculation for debugging.
+        """Return a detailed string representation of the calculation for debugging.
 
         Returns:
-            A string in the format ClassName: operand_a = a, operand_b = b.
+            A string in the format 'ClassName: operand_a = <a>, operand_b = <b>, result = <result>'.
         """
         return f"{self.__class__.__name__}: operand_a = {self.operand_a}, operand_b = {self.operand_b}, result = {self.result}"
     
     def to_dict(self) -> dict:
+        """Serialize this calculation to a dictionary.
+
+        Returns:
+            A dict with keys 'operation', 'operand_a', 'operand_b', and 'result'.
+        """
         operation = next(k for k, v in CalculationFactory._calculations.items() if v == self.__class__)
         return {
             "operation": operation,
@@ -134,6 +137,17 @@ class CalculationFactory:
     
     @classmethod
     def from_dict(cls, data: dict) -> Calculation:
+        """Deserialize a Calculation from a dictionary.
+
+        Args:
+            data: A dict with keys 'operation', 'operand_a', 'operand_b', and 'result'.
+
+        Returns:
+            A Calculation instance with result already set.
+
+        Raises:
+            ValueError: If the operation name is not registered.
+        """
         calc = cls.build_calculation(
             data["operation"],
             float(data["operand_a"]),

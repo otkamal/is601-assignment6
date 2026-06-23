@@ -147,6 +147,11 @@ class Calculator():
         return CalculationFactory.get_supported_operations()
     
     def undo(self):
+        """Revert to the history state before the most recent calculation.
+
+        Returns:
+            True if a state was restored, False if the undo stack was empty.
+        """
         if not self._undo_stack:
             return False
         memento = self._undo_stack.pop()
@@ -155,6 +160,11 @@ class Calculator():
         return True
 
     def redo(self):
+        """Re-apply the most recently undone calculation.
+
+        Returns:
+            True if a state was restored, False if the redo stack was empty.
+        """
         if not self._redo_stack:
             return False
         memento = self._redo_stack.pop()
