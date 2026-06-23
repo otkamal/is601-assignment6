@@ -25,4 +25,4 @@ jobs:
         run: pytest --cov=app --cov-fail-under=10 --cov-report=term-missing
       - name: Run flake8 Linting
         run: |
-          flake8 --extend-ignore E501 app/calculator/__init__.py app/operations/__init__.py main.py
+          flake8 --extend-ignore E501 app/* main.py
