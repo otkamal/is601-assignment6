@@ -292,27 +292,88 @@ class Modulus(Calculation):
 @CalculationFactory.register_calculation('percent')
 class Percent(Calculation):
 
+    """
+    Calculation that expresses the first operand as a percentage of the second.
+
+    Methods:
+        execute(): Returns (operand_a / operand_b) * 100.
+    """
+
     def execute(self) -> float:
+        """
+        Expresses operand_a as a percentage of operand_b.
+
+        Returns:
+            (operand_a / operand_b) * 100.
+
+        Raises:
+            ZeroDivisionError: If operand_b is zero.
+        """
         self.result = Operations.percent(self.operand_a, self.operand_b)
         return self.result
 
 @CalculationFactory.register_calculation('abs')
 class AbsoluteDifference(Calculation):
 
+    """
+    Calculation that returns the non-negative difference between two operands.
+
+    Methods:
+        execute(): Returns the absolute value of operand_a - operand_b.
+    """
+
     def execute(self) -> float:
+        """
+        Computes the absolute difference between the two operands.
+
+        Returns:
+            The absolute value of operand_a - operand_b.
+        """
         self.result = Operations.absolute_difference(self.operand_a, self.operand_b)
         return self.result
 
 @CalculationFactory.register_calculation('int_div')
-class AbsoluteDifference(Calculation):
+class IntegerDivision(Calculation):
+
+    """
+    Calculation that divides the first operand by the second and truncates to an integer.
+
+    Methods:
+        execute(): Returns the floored quotient of operand_a and operand_b.
+    """
 
     def execute(self) -> float:
+        """
+        Divides operand_a by operand_b and truncates to an integer quotient.
+
+        Returns:
+            The floored quotient of operand_a and operand_b.
+
+        Raises:
+            ZeroDivisionError: If operand_b is zero.
+        """
         self.result = Operations.integer_division(self.operand_a, self.operand_b)
         return self.result
-    
+
 @CalculationFactory.register_calculation('root')
 class Root(Calculation):
 
+    """
+    Calculation that returns the nth root of the first operand.
+
+    Methods:
+        execute(): Returns operand_a raised to the power of 1 / operand_b.
+    """
+
     def execute(self) -> float:
+        """
+        Computes the operand_b-th root of operand_a.
+
+        Returns:
+            operand_a raised to the power of 1 / operand_b.
+
+        Raises:
+            ZeroDivisionError: If operand_b is zero.
+        """
         self.result = Operations.nth_root(self.operand_a, self.operand_b)
         return self.result

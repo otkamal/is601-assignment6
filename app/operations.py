@@ -13,6 +13,10 @@ class Operations():
         division(a, b): Returns the quotient of a and b.
         power(a, b): Returns a raised to the power of b.
         modulus(a, b): Returns the remainder of a divided by b.
+        percent(a, b): Returns a as a percentage of b.
+        absolute_difference(a, b): Returns the non-negative difference of a and b.
+        integer_division(a, b): Returns the floored quotient of a and b.
+        nth_root(a, b): Returns the b-th root of a.
     """
 
     @staticmethod
@@ -111,23 +115,71 @@ class Operations():
     
     @staticmethod
     def percent(a: float, b: float) -> float:
+        """
+        Expresses a as a percentage of b.
 
+        Args:
+            a: The part.
+            b: The whole.
+
+        Returns:
+            (a / b) * 100.
+
+        Raises:
+            ZeroDivisionError: If b is zero.
+        """
         dec = Operations.division(a, b)
         return dec * 100
-    
+
     @staticmethod
     def absolute_difference(a: float, b: float) -> float:
+        """
+        Returns the non-negative difference between two numbers.
+
+        Args:
+            a: The first number.
+            b: The second number.
+
+        Returns:
+            The absolute value of a - b.
+        """
         difference = Operations.subtraction(a, b)
         return difference if difference >= 0 else difference * -1
-    
+
     @staticmethod
     def integer_division(a: float, b: float) -> float:
+        """
+        Divides a by b and truncates to an integer quotient.
+
+        Args:
+            a: The dividend.
+            b: The divisor.
+
+        Returns:
+            The floored quotient of a and b.
+
+        Raises:
+            ZeroDivisionError: If b is zero.
+        """
         if b == 0:
             raise ZeroDivisionError("b cannot be 0.")
         return a // b
 
     @staticmethod
     def nth_root(a: float, b: float) -> float:
+        """
+        Returns the b-th root of a.
+
+        Args:
+            a: The number to root.
+            b: The degree of the root.
+
+        Returns:
+            a raised to the power of 1/b.
+
+        Raises:
+            ZeroDivisionError: If b is zero.
+        """
         if b == 0:
             raise ZeroDivisionError("b cannot be 0.")
         return Operations.power(a, 1 / b)

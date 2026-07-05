@@ -35,6 +35,12 @@ class AutoSaveSubscriber(Subscriber):
 
     _events_seen = 0
     def __init__(self, events_before_autosave: int = 1):
+        """Initialize the subscriber with the auto-save threshold.
+
+        Args:
+            events_before_autosave: Number of calculations to wait for before
+                auto-saving history to disk.
+        """
         self._events_before_autosave = events_before_autosave
 
     def update(self, calculator: "Calculator"):   
