@@ -119,4 +119,10 @@ class Operations():
     def absolute_difference(a: float, b: float) -> float:
         difference = Operations.subtraction(a, b)
         return difference if difference >= 0 else difference * -1
+    
+    @staticmethod
+    def integer_division(a: float, b: float) -> float:
+        if b == 0:
+            raise ZeroDivisionError("b cannot be 0.")
+        return a // b
 
