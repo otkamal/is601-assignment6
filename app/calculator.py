@@ -57,10 +57,17 @@ class Calculator():
         # otherwise use the first operation found
         if not op:
             op = operation
+            logging.warning(f"OPERATION {operation} does not seem to match anything in supported operations. falling back to provided")
         else:
             op = op[0]
+            logging.info(f"matched OPERATION {operation} to OPERATION {op}")
+        if operand_a > self.config.max_value or operand_b > self.config.max_value:
+            logging.error("operands exceed maximum supported value")
+            raise ValueError(f"operand exceeds maximum supported value: {self.config.max_value}")
         calc = CalculationFactory.build_calculation(op, operand_a, operand_b)
         calc.execute()
+        # apply precision
+        calc.result = round(calc.result, self.config.precision)
         self._undo_stack.append(CalculatorMemento(self))
         self._redo_stack.clear()
         if len(self._history) >= self.config.history_size:
