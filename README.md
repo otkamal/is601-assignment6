@@ -1,4 +1,4 @@
-# Module 6 - Calculator with Command Pattern REPL Dispatch
+# Module 6 - Midterm Project
 
 A command-line calculator REPL built in Python. Started as a plain add/subtract/multiply/divide loop and has grown, module by module, into a small pattern showcase: a **Factory** for calculations, a **Singleton** for configuration, a **Memento** for undo/redo, an **Observer** for logging and auto-save, and now a **Command** pattern for the REPL's own dispatch loop.
 
