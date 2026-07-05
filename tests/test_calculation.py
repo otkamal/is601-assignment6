@@ -10,6 +10,7 @@ from app.calculation import Calculation, CalculationFactory
         ("multiply", 3, 3, 9),
         ("power", 5, 2, 25),
         ("modulus", 5, 3, 2),
+        ("percent", 1, 2, 50),
         ("ADD", 4, 2, 6),
     ],
     ids=[
@@ -19,6 +20,7 @@ from app.calculation import Calculation, CalculationFactory
         "factory_multiply",
         "factory_power",
         "factory_modulus",
+        "factory_percent",
         "factory_add_case_insensitive",
     ]
 )

@@ -157,3 +157,22 @@ def test_modulus(a: float, b: float, expected: float) -> None:
 def test_modulus_by_zero(a: float, b: float) -> None:
     with pytest.raises(ZeroDivisionError, match="b cannot be 0."):
         assert Operations.modulus(a, b)
+
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (4, 2, 200),
+        (1, 2, 50),
+        (2, 8, 25),
+        (7, 8, 87.5)
+    ],
+    ids=[
+        "percent_gt_hundred",
+        "percent_half",
+        "percent_quarter",
+        "percent_fractional"
+    ]
+)
+def test_percent(a: float, b: float, expected: float) -> None:
+    result = Operations.percent(a, b)
+    assert result == expected, f"Expected {a} / {b} == {expected}. Got {result}."
