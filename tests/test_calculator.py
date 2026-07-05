@@ -64,6 +64,18 @@ def test_raises_when_divide_by_zero(calculator):
     with pytest.raises(ZeroDivisionError):
         calculator.calculate('divide', 5, 0)
 
+def test_raises_when_max_value_a():
+    c = Calculator()
+    c.config.max_value = 5
+    with pytest.raises(ValueError):
+        c.calculate('add', 6, 2)
+
+def test_raises_when_max_value_b():
+    c = Calculator()
+    c.config.max_value = 5
+    with pytest.raises(ValueError):
+        c.calculate('add', 2, 6)
+
 def test_calculate_adds_to_history(calculator):
     calculator.calculate('add', 1, 2)
     assert len(calculator.get_history()) == 1
