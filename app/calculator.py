@@ -52,6 +52,9 @@ class Calculator():
             ZeroDivisionError: If the operation divides by zero.
         """
         op = [possible_op for possible_op in self.get_supported_operations() if operation in possible_op]
+        # if the operation was not found in supported ops
+        # use the provided operation and let CalculationFactory handle the issue
+        # otherwise use the first operation found
         if not op:
             op = operation
         else:
