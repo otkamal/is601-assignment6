@@ -51,7 +51,12 @@ class Calculator():
             ValueError: If the operation is not registered.
             ZeroDivisionError: If the operation divides by zero.
         """
-        calc = CalculationFactory.build_calculation(operation, operand_a, operand_b)
+        op = [possible_op for possible_op in self.get_supported_operations() if operation in possible_op]
+        if not op:
+            op = operation
+        else:
+            op = op[0]
+        calc = CalculationFactory.build_calculation(op, operand_a, operand_b)
         calc.execute()
         self._undo_stack.append(CalculatorMemento(self))
         self._redo_stack.clear()
