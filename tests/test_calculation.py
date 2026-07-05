@@ -12,6 +12,7 @@ from app.calculation import Calculation, CalculationFactory
         ("modulus", 5, 3, 2),
         ("percent", 1, 2, 50),
         ("abs", 5, 3, 2),
+        ("int_div", 7, 3, 2),
         ("ADD", 4, 2, 6),
     ],
     ids=[
@@ -23,6 +24,7 @@ from app.calculation import Calculation, CalculationFactory
         "factory_modulus",
         "factory_percent",
         "factory_abs",
+        "factory_int_div",
         "factory_add_case_insensitive",
     ]
 )
@@ -87,7 +89,7 @@ def test_duplicate_registration() -> None:
 
 def test_unsupported_operation() -> None:
     with pytest.raises(ValueError, match="is not a supported operation."):
-        CalculationFactory.build_calculation("percent", 5, 100)
+        CalculationFactory.build_calculation("flimflam", 5, 100)
 
 def test_faactory_division_by_zero() -> None:
     with pytest.raises(ZeroDivisionError, match="b cannot be 0."):

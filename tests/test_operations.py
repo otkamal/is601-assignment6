@@ -193,3 +193,33 @@ def test_percent(a: float, b: float, expected: float) -> None:
 def test_abs(a: float, b: float, expected: float) -> None:
     result = Operations.absolute_difference(a, b)
     assert result == expected, f"Expected {a} / {b} == {expected}. Got {result}."
+
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (3, 2, 1),
+        (1, 2, 0),
+        (7, -3, -3)
+    ],
+    ids=[
+        "int_div_a_gt_b",
+        "int_div_b_gt_a",
+        "int_div_a_gt_b_negative"
+    ]
+)
+def test_int_div(a: float, b: float, expected: float) -> None:
+    result = Operations.integer_division(a, b)
+    assert result == expected, f"Expected {a} // {b} == {expected}. Got {result}."
+
+@pytest.mark.parametrize(
+    "a, b",
+    [
+        (5, 0)
+    ],
+    ids=[
+        "int_div_by_zero"
+    ]
+)
+def test_int_div_by_zero(a: float, b: float) -> None:
+    with pytest.raises(ZeroDivisionError, match="b cannot be 0."):
+        assert Operations.integer_division(a, b)
