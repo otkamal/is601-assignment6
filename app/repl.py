@@ -1,3 +1,4 @@
+from colorama import Fore, init, Style
 from pyfiglet import Figlet
 from app.calculator import Calculator
 
@@ -28,51 +29,53 @@ def start_repl(calculator: Calculator) -> None:
         Result: 8.0
     """
 
+    init()
     startscreen = Figlet(font="slant")
-    print(startscreen.renderText("Calculator REPL"))
-    print("Type 'exit' to quit.")
+    print(Fore.GREEN + startscreen.renderText("Calculator REPL"))
+    print(Style.RESET_ALL)
     print("Enter an operation and two numbers, or 'exit' to quit.")
-    print("Enter 'help' to see available operations or 'history' to see previously ran operations.")
+    print(Fore.YELLOW + "Enter 'help' to see available operations or 'history' to see previously ran operations.")
 
     try:
-        while True:
-            user_input = input("\n>>> ")
+        while True: 
+            print(Style.RESET_ALL)  
+            user_input = input(Fore.LIGHTBLUE_EX + ">>> " + Style.RESET_ALL)
             user_input = user_input.lower()
             if user_input == "exit":
-                print("Exiting calculator... Goodbye ~")
+                print(Fore.LIGHTBLUE_EX + "Exiting calculator... Goodbye ~")
                 break
             elif user_input == "history":
                 history = calculator.get_history()
                 if not history:
-                    print("No history yet.")
+                    print(Fore.YELLOW + "No history yet.")
                 else:
                     for i, calc in enumerate(history, start=1):
                         print(f"{i}. {calc}")
                 continue
             elif user_input == "save":
                 calculator.save_history()
-                print("History saved to disk.")
+                print(Fore.GREEN + "History saved to disk.")
                 continue
             elif user_input == "clear":
                 calculator.clear_history()
-                print("History has been cleared.")
+                print(Fore.GREEN + "History has been cleared.")
                 continue
             elif user_input == "load":
                 calculator.clear_history()
                 calculator.load_history()
-                print("History has been reloaded.")
+                print(Fore.GREEN + "History has been reloaded.")
                 continue
             elif user_input == "undo":
                 if calculator.undo():
-                    print("History has been undone.")
+                    print(Fore.GREEN + "History has been undone.")
                 else:
-                    print("Nothing to undo.")
+                    print(Fore.YELLOW + "Nothing to undo.")
                 continue
             elif user_input == "redo":
                 if calculator.redo():
-                    print("History has been redone.")
+                    print(Fore.GREEN + "History has been redone.")
                 else:
-                    print("Nothing to redo.")
+                    print(Fore.YELLOW + "Nothing to redo.")
                 continue
             elif user_input == "help":
                 print("Available Commands:")
@@ -86,12 +89,12 @@ def start_repl(calculator: Calculator) -> None:
                 operation, a, b = user_input.split()
                 a, b = float(a), float(b)
                 result = calculator.calculate(operation, a, b).result
-                print(f"Result: {result}")
+                print(Fore.GREEN + f"Result: {result}")
             except ValueError as e:
-                print(f"Error: {e}")
+                print(Fore.RED + f"Error: {e}")
                 continue
             except ZeroDivisionError as e:
-                print(f"Error: {e}")
+                print(Fore.RED + f"Error: {e}")
                 continue
 
     finally:
