@@ -1,6 +1,7 @@
 import readline
 from colorama import Fore, init, Style
 from pyfiglet import Figlet
+import logging
 from app.calculator import Calculator
 
 
@@ -92,9 +93,11 @@ def start_repl(calculator: Calculator) -> None:
                 result = calculator.calculate(operation, a, b).result
                 print(Fore.GREEN + f"Result: {result}")
             except ValueError as e:
+                logging.error(e)
                 print(Fore.RED + f"Error: {e}")
                 continue
             except ZeroDivisionError as e:
+                logging.error(e)
                 print(Fore.RED + f"Error: {e}")
                 continue
 
