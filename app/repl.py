@@ -1,3 +1,4 @@
+import readline
 from colorama import Fore, init, Style
 from pyfiglet import Figlet
 from app.calculator import Calculator
@@ -50,7 +51,7 @@ def start_repl(calculator: Calculator) -> None:
                     print(Fore.YELLOW + "No history yet.")
                 else:
                     for i, calc in enumerate(history, start=1):
-                        print(f"{i}. {calc}")
+                        print(Fore.YELLOW + f"{i}. {calc}")
                 continue
             elif user_input == "save":
                 calculator.save_history()
@@ -78,9 +79,9 @@ def start_repl(calculator: Calculator) -> None:
                     print(Fore.YELLOW + "Nothing to redo.")
                 continue
             elif user_input == "help":
-                print("Available Commands:")
-                print("1. help\n2. save\n3. clear\n4. load\n5. redo\n6. undo\n7. exit\n")
-                print("Available Operations:")
+                print(Fore.YELLOW + "Available Commands:")
+                print(Style.RESET_ALL + "1. help\n2. save\n3. clear\n4. load\n5. redo\n6. undo\n7. exit\n")
+                print(Fore.YELLOW + "Available Operations:" + Style.RESET_ALL)
                 for i, k in enumerate(calculator.get_supported_operations(), start=1):
                     print(f"{i}. {k}")
                 continue
