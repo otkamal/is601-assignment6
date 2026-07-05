@@ -176,3 +176,20 @@ def test_modulus_by_zero(a: float, b: float) -> None:
 def test_percent(a: float, b: float, expected: float) -> None:
     result = Operations.percent(a, b)
     assert result == expected, f"Expected {a} / {b} == {expected}. Got {result}."
+
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (0, 0, 0),
+        (1, 2, 1),
+        (5, 3, 2)
+    ],
+    ids=[
+        "abs_zero",
+        "abs_b_lt",
+        "abs_b_gt"
+    ]
+)
+def test_abs(a: float, b: float, expected: float) -> None:
+    result = Operations.absolute_difference(a, b)
+    assert result == expected, f"Expected {a} / {b} == {expected}. Got {result}."
