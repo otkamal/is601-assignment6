@@ -223,3 +223,31 @@ def test_int_div(a: float, b: float, expected: float) -> None:
 def test_int_div_by_zero(a: float, b: float) -> None:
     with pytest.raises(ZeroDivisionError, match="b cannot be 0."):
         assert Operations.integer_division(a, b)
+
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (4, 2, 2),
+        (27, 3, 3)
+    ],
+    ids=[
+        "root_even",
+        "root_odd"
+    ]
+)
+def test_root(a: float, b: float, expected: float) -> None:
+    result = Operations.nth_root(a, b)
+    assert result == expected, f"Expected {a} root {b} == {expected}. Got {result}."
+
+@pytest.mark.parametrize(
+    "a, b",
+    [
+        (5, 0)
+    ],
+    ids=[
+        "root_by_zero"
+    ]
+)
+def test_root_of_zero(a: float, b: float) -> None:
+    with pytest.raises(ZeroDivisionError, match="b cannot be 0."):
+        assert Operations.nth_root(a, b)

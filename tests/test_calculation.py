@@ -13,6 +13,7 @@ from app.calculation import Calculation, CalculationFactory
         ("percent", 1, 2, 50),
         ("abs", 5, 3, 2),
         ("int_div", 7, 3, 2),
+        ("root", 4, 2, 2),
         ("ADD", 4, 2, 6),
     ],
     ids=[
@@ -25,6 +26,7 @@ from app.calculation import Calculation, CalculationFactory
         "factory_percent",
         "factory_abs",
         "factory_int_div",
+        "factory_root",
         "factory_add_case_insensitive",
     ]
 )
