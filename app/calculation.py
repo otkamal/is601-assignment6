@@ -295,3 +295,10 @@ class Percent(Calculation):
     def execute(self) -> float:
         self.result = Operations.percent(self.operand_a, self.operand_b)
         return self.result
+
+@CalculationFactory.register_calculation('abs')
+class AbsoluteDifference(Calculation):
+
+    def execute(self) -> float:
+        self.result = Operations.absolute_difference(self.operand_a, self.operand_b)
+        return self.result

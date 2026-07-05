@@ -114,3 +114,9 @@ class Operations():
 
         dec = Operations.division(a, b)
         return dec * 100
+    
+    @staticmethod
+    def absolute_difference(a: float, b: float) -> float:
+        difference = Operations.subtraction(a, b)
+        return difference if difference >= 0 else difference * -1
+
