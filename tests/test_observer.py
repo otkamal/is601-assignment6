@@ -9,6 +9,19 @@ def test_update_on_shutdown_saves_history():
     sub.update_on_shutdown(mock_calculator)
     mock_calculator.save_history.assert_called_once()
 
+def test_update_on_events_not_seen_threshold():
+    mock_calculator = MagicMock()
+    sub = AutoSaveSubscriber()
+    sub.update(mock_calculator)
+    mock_calculator.save_history.assert_not_called()
+    
+def test_update_on_events_seen_threshold():
+    mock_calculator = MagicMock()
+    sub = AutoSaveSubscriber()
+    sub._events_seen = 1
+    sub.update(mock_calculator)
+    mock_calculator.save_history.assert_called_once()
+
 def test_update_logs_on_calculation(caplog):
     mock_calculator = MagicMock()
     sub = CalculationSubscriber()
