@@ -309,3 +309,10 @@ class AbsoluteDifference(Calculation):
     def execute(self) -> float:
         self.result = Operations.integer_division(self.operand_a, self.operand_b)
         return self.result
+    
+@CalculationFactory.register_calculation('root')
+class Root(Calculation):
+
+    def execute(self) -> float:
+        self.result = Operations.nth_root(self.operand_a, self.operand_b)
+        return self.result

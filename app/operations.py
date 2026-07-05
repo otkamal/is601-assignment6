@@ -126,3 +126,8 @@ class Operations():
             raise ZeroDivisionError("b cannot be 0.")
         return a // b
 
+    @staticmethod
+    def nth_root(a: float, b: float) -> float:
+        if b == 0:
+            raise ZeroDivisionError("b cannot be 0.")
+        return Operations.power(a, 1 / b)
