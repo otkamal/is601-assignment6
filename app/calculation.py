@@ -288,3 +288,10 @@ class Modulus(Calculation):
         """
         self.result = Operations.modulus(self.operand_a, self.operand_b)
         return self.result
+
+@CalculationFactory.register_calculation('percent')
+class Percent(Calculation):
+
+    def execute(self) -> float:
+        self.result = Operations.percent(self.operand_a, self.operand_b)
+        return self.result
