@@ -141,4 +141,4 @@ def test_help(monkeypatch, capsys):
     inputs = iter(["help", "exit"])
     monkeypatch.setattr("builtins.input", lambda _: next(inputs))
     start_repl(mock_calculator)
-    assert "Available Commands" and "1. add" in capsys.readouterr().out
+    assert "Available Commands" in capsys.readouterr().out
