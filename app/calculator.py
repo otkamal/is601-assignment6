@@ -31,7 +31,7 @@ class Calculator():
 
         self._add_subscriber(CalculationSubscriber())
         if self.config.auto_save:
-            self._add_subscriber(AutoSaveSubscriber())
+            self._add_subscriber(AutoSaveSubscriber(self.config.events_before_autosave))
 
         self._undo_stack: list[CalculatorMemento] = []
         self._redo_stack: list[CalculatorMemento] = []

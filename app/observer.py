@@ -33,8 +33,15 @@ class CalculationSubscriber(Subscriber):
 class AutoSaveSubscriber(Subscriber):
     """Persists history to disk when the calculator shuts down."""
 
-    def update(self, calculator: "Calculator"):     # pragma: no cover
-        pass                                        # pragma: no cover
+    _events_seen = 0
+    def __init__(self, events_before_autosave: int = 1):
+        self._events_before_autosave = events_before_autosave
+
+    def update(self, calculator: "Calculator"):   
+        self._events_seen += 1
+        if self._events_seen > self._events_before_autosave:
+            calculator.save_history()
+            self._events_seen = 0
 
     def update_on_shutdown(self, calculator: "Calculator"):
         """Save the current history to the configured CSV file."""

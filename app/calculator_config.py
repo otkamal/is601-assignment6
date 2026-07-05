@@ -33,6 +33,7 @@ class CalculatorConfig:
     _DEF_HIST_DIR = str(Path(_DEF_BASE_DIR) / "history")
     _DEF_HIST_FILE = str(Path(_DEF_HIST_DIR) / "history.csv")
     _DEF_LOG_FILE = str(Path(_DEF_LOG_DIR) / "calculator.log")
+    _DEF_EVENTS_BEFORE_AUTOSAVE = '1'
 
     def __new__(cls, *args, **kwargs):
         """Return the existing instance or create one if none exists."""
@@ -60,6 +61,7 @@ class CalculatorConfig:
         self.history_directory = Path(os.getenv('CALCULATOR_HIST_DIR', self._DEF_HIST_DIR))
         self.history_file = Path(os.getenv('CALCULATOR_HISTORY_FILE', self._DEF_HIST_FILE))
         self.log_file = Path(os.getenv('CALCULATOR_LOG_FILE', self._DEF_LOG_FILE))
+        self.events_before_autosave = int(os.getenv('CALCULATOR_EVENTS_BEFORE_AUTOSAVE', self._DEF_EVENTS_BEFORE_AUTOSAVE))
 
     def setup_directories(self) -> None:
         """Create the log and history directories if they do not exist."""
