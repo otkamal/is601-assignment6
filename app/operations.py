@@ -112,7 +112,7 @@ class Operations():
         if b == 0:
             raise ZeroDivisionError("b cannot be 0.")
         return a % b
-    
+
     @staticmethod
     def percent(a: float, b: float) -> float:
         """

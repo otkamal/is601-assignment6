@@ -289,6 +289,7 @@ class Modulus(Calculation):
         self.result = Operations.modulus(self.operand_a, self.operand_b)
         return self.result
 
+
 @CalculationFactory.register_calculation('percent')
 class Percent(Calculation):
 
@@ -312,6 +313,7 @@ class Percent(Calculation):
         self.result = Operations.percent(self.operand_a, self.operand_b)
         return self.result
 
+
 @CalculationFactory.register_calculation('abs')
 class AbsoluteDifference(Calculation):
 
@@ -331,6 +333,7 @@ class AbsoluteDifference(Calculation):
         """
         self.result = Operations.absolute_difference(self.operand_a, self.operand_b)
         return self.result
+
 
 @CalculationFactory.register_calculation('int_div')
 class IntegerDivision(Calculation):
@@ -354,6 +357,7 @@ class IntegerDivision(Calculation):
         """
         self.result = Operations.integer_division(self.operand_a, self.operand_b)
         return self.result
+
 
 @CalculationFactory.register_calculation('root')
 class Root(Calculation):

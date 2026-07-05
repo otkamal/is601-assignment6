@@ -37,7 +37,8 @@ class ReplCmd(ABC):
             args: Remaining tokens from the user's input line, after the
                 command name itself has been consumed by the caller.
         """
-        pass #PRAGMA: NO COVER
+        pass  # PRAGMA: NO COVER
+
 
 class ReplCmdFactory:
 
@@ -107,6 +108,7 @@ class ReplCmdFactory:
         """
         return cls._cmds.keys()
 
+
 @ReplCmdFactory.register_command('history')
 class HistoryCmd(ReplCmd):
 
@@ -136,6 +138,7 @@ class SaveCmd(ReplCmd):
         calculator.save_history()
         print(Fore.GREEN + "History saved to disk.")
 
+
 @ReplCmdFactory.register_command('clear')
 class ClearCmd(ReplCmd):
 
@@ -147,6 +150,7 @@ class ClearCmd(ReplCmd):
         """Clear the calculator's in-memory history."""
         calculator.clear_history()
         print(Fore.GREEN + "History has been cleared.")
+
 
 @ReplCmdFactory.register_command('load')
 class LoadCmd(ReplCmd):
@@ -160,6 +164,7 @@ class LoadCmd(ReplCmd):
         calculator.clear_history()
         calculator.load_history()
         print(Fore.GREEN + "History has been reloaded.")
+
 
 @ReplCmdFactory.register_command('undo')
 class UndoCmd(ReplCmd):
@@ -175,6 +180,7 @@ class UndoCmd(ReplCmd):
         else:
             print(Fore.YELLOW + "Nothing to undo.")
 
+
 @ReplCmdFactory.register_command('redo')
 class RedoCmd(ReplCmd):
 
@@ -188,6 +194,7 @@ class RedoCmd(ReplCmd):
             print(Fore.GREEN + "History has been redone.")
         else:
             print(Fore.YELLOW + "Nothing to redo.")
+
 
 @ReplCmdFactory.register_command('help')
 class HelpCmd(ReplCmd):
@@ -214,6 +221,7 @@ class HelpCmd(ReplCmd):
             row = operations[i:i + per_row]
             print("  " + "  ".join(f"{Fore.CYAN}{op.ljust(op_width)}{Style.RESET_ALL}" for op in row))
 
+
 @ReplCmdFactory.register_command('exit')
 class ExitCmd(ReplCmd):
 
@@ -229,6 +237,7 @@ class ExitCmd(ReplCmd):
         """
         print(Fore.LIGHTBLUE_EX + "Exiting calculator... Goodbye ~")
         raise ReplExit()
+
 
 class CalculateCmd(ReplCmd):
 

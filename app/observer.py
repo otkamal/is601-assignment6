@@ -34,6 +34,7 @@ class AutoSaveSubscriber(Subscriber):
     """Persists history to disk when the calculator shuts down."""
 
     _events_seen = 0
+
     def __init__(self, events_before_autosave: int = 1):
         """Initialize the subscriber with the auto-save threshold.
 
@@ -43,7 +44,7 @@ class AutoSaveSubscriber(Subscriber):
         """
         self._events_before_autosave = events_before_autosave
 
-    def update(self, calculator: "Calculator"):   
+    def update(self, calculator: "Calculator"):
         self._events_seen += 1
         if self._events_seen > self._events_before_autosave:
             calculator.save_history()

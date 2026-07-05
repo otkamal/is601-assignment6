@@ -1,7 +1,6 @@
 import readline
 from colorama import Fore, init, Style
 from pyfiglet import Figlet
-import logging
 from app.calculator import Calculator
 from app.exceptions import ReplExit
 from app.repl_commands import ReplCmdFactory, CalculateCmd
@@ -41,9 +40,8 @@ def start_repl(calculator: Calculator) -> None:
     print(Fore.YELLOW + "Enter 'help' to see available operations or 'history' to see previously ran operations.")
 
     try:
-        while True: 
-
-            print(Style.RESET_ALL)  
+        while True:
+            print(Style.RESET_ALL)
             user_input = input(Fore.LIGHTBLUE_EX + ">>> " + Style.RESET_ALL)
             user_input = user_input.lower()
             tokens = user_input.split()
@@ -59,7 +57,7 @@ def start_repl(calculator: Calculator) -> None:
                 cmd.execute(calculator, args)
                 continue
             except ReplExit:
-                break  
-  
+                break
+
     finally:
         calculator.shutdown()
