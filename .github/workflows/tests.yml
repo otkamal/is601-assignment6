@@ -22,7 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run Tests
-        run: pytest --cov=app --cov-fail-under=10 --cov-report=term-missing
+        run: pytest --cov=app --cov-fail-under=100 --cov-report=term-missing
       - name: Run flake8 Linting
         run: |
           flake8 --extend-ignore E501,F401 app/* main.py
